@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank App - Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="glass-container">
+        <h1>Welcome to NextGen Bank</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flashes">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <div class="forms-wrapper">
+            <div class="form-section">
+                <h2>Login</h2>
+                <form method="POST">
+                    <input type="hidden" name="action" value="login">
+                    <div class="input-group">
+                        <label for="login-name">Name</label>
+                        <input type="text" id="login-name" name="name" required autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label for="login-pin">4-Digit PIN</label>
+                        <input type="password" id="login-pin" name="pin" required pattern="\d{4}" title="Please enter exactly 4 digits" maxlength="4">
+                    </div>
+                    <button type="submit" class="btn primary-btn">Login</button>
+                </form>
+            </div>
+            
+            <div class="divider"></div>
+
+            <div class="form-section">
+                <h2>Create Account</h2>
+                <form method="POST">
+                    <input type="hidden" name="action" value="create">
+                    <div class="input-group">
+                        <label for="create-name">Name</label>
+                        <input type="text" id="create-name" name="name" required autocomplete="off">
+                    </div>
+                    <div class="input-group">
+                        <label for="create-pin">4-Digit PIN</label>
+                        <input type="password" id="create-pin" name="pin" required pattern="\d{4}" title="Please enter exactly 4 digits" maxlength="4">
+                    </div>
+                    <button type="submit" class="btn secondary-btn">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
